@@ -1,20 +1,25 @@
-:root {
-  --bg-paper: #F8F7F4;
-  --bg-alt: #EFECE6;
-  --bg-dark: #111622;
-  --bg-card: #FFFFFF;
-  --text-main: #1A1C20;
-  --text-muted: #525866;
-  --text-light: #F3F4F6;
-  --accent-gold: #B88B1E;
-  --accent-blue: #1D4E89;
+/* ============================================================
+   Martin Luther King Jr.: site educacional
+   HTML5 + CSS3 puro (sem JavaScript)
+   ============================================================ */
 
-  /* Derivações para contraste AA em fundo escuro */
-  --accent-gold-light: #E7C66F;
-  --border-soft: rgba(17, 22, 34, 0.12);
-  --border-light: rgba(243, 244, 246, 0.24);
-  --shadow-editorial: 0 24px 55px -30px rgba(17, 22, 34, 0.55);
-  --font-heading: "Merriweather", "Playfair Display", Georgia, "Times New Roman", serif;
+:root {
+  --bg-paper: #F7F5F0;
+  --bg-alt: #EAE6DF;
+  --bg-dark: #14171F;
+  --bg-card: #FFFFFF;
+  --text-main: #181A1F;
+  --text-muted: #505562;
+  --text-light: #F3F4F6;
+  --accent-gold: #B5851D;
+  --accent-burgundy: #7A2323;
+
+  /* Derivações para contraste e consistência visual */
+  --accent-gold-light: #E3BF62;
+  --border-soft: rgba(24, 26, 31, 0.13);
+  --border-light: rgba(243, 244, 246, 0.22);
+  --shadow-editorial: 0 24px 55px -30px rgba(20, 23, 31, 0.55);
+  --font-heading: "Playfair Display", "Merriweather", Georgia, "Times New Roman", serif;
   --font-body: "Inter", "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
   --container: 1120px;
   --timeline-pad: 1.5rem;
@@ -32,7 +37,7 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-/* Evita que motores que não animam fragmentos travem as âncoras ao clicar. */
+/* Mantém as âncoras confiáveis em motores que não animam fragmentos. */
 html:has(a[href^="#"]:hover) {
   scroll-behavior: auto;
 }
@@ -64,12 +69,12 @@ ul {
 }
 
 a {
-  color: var(--accent-blue);
+  color: var(--accent-burgundy);
   text-underline-offset: 0.2em;
 }
 
 :focus-visible {
-  outline: 3px solid var(--accent-blue);
+  outline: 3px solid var(--accent-burgundy);
   outline-offset: 3px;
 }
 
@@ -120,7 +125,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(248, 247, 244, 0.95);
+  background: rgba(247, 245, 240, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-soft);
 }
@@ -138,20 +143,23 @@ a {
   gap: 0.7rem;
   color: var(--text-main);
   text-decoration: none;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.25, 1);
 }
 
-.brand__mark {
-  display: grid;
-  place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
+.brand:hover,
+.brand:focus-visible {
+  transform: translateY(-2px);
+}
+
+.brand:active {
+  transform: translateY(1px);
+}
+
+.brand__logo {
+  width: auto;
+  height: 40px;
   flex: 0 0 auto;
-  background: var(--bg-dark);
-  color: var(--text-light);
-  border-bottom: 2px solid var(--accent-gold);
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 900;
+  mix-blend-mode: multiply;
 }
 
 .brand__text {
@@ -162,7 +170,7 @@ a {
 
 .brand__text strong {
   font-family: var(--font-heading);
-  font-size: 1.02rem;
+  font-size: 1rem;
 }
 
 .brand__text small {
@@ -190,7 +198,7 @@ a {
 
 .site-nav a:hover,
 .site-nav a:focus-visible {
-  color: var(--accent-blue);
+  color: var(--accent-burgundy);
   border-bottom-color: var(--accent-gold);
   transform: translateY(-3px);
 }
@@ -204,7 +212,7 @@ a {
   padding-block: clamp(3rem, 7vw, 6rem);
   border-bottom: 1px solid var(--border-soft);
   background:
-    radial-gradient(circle at 82% 18%, rgba(184, 139, 30, 0.1), transparent 42%),
+    radial-gradient(circle at 82% 18%, rgba(181, 133, 29, 0.1), transparent 42%),
     var(--bg-paper);
 }
 
@@ -215,9 +223,13 @@ a {
   align-items: center;
 }
 
+.hero__copy {
+  min-width: 0;
+}
+
 .eyebrow {
   margin-bottom: 0.9rem;
-  color: var(--accent-blue);
+  color: var(--accent-burgundy);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -227,17 +239,18 @@ a {
 .hero h1 {
   margin: 0 0 0.75rem;
   font-family: var(--font-heading);
-  font-size: clamp(2.6rem, 9vw, 5rem);
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
   font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .hero__subtitle {
   max-width: 36rem;
   color: var(--text-muted);
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  line-height: 1.55;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.6;
 }
 
 .btn {
@@ -246,9 +259,9 @@ a {
   gap: 0.6rem;
   margin: 0.5rem 0 2rem;
   padding: 0.75rem 1.35rem;
-  background: var(--accent-blue);
+  background: var(--accent-burgundy);
   color: var(--bg-card);
-  border: 2px solid var(--accent-blue);
+  border: 2px solid var(--accent-burgundy);
   border-radius: 2px;
   box-shadow: 4px 4px 0 var(--accent-gold);
   font-size: 0.95rem;
@@ -286,7 +299,7 @@ a {
 
 .hero__facts strong {
   flex: 0 0 auto;
-  color: var(--accent-blue);
+  color: var(--accent-burgundy);
   font-family: var(--font-heading);
   font-size: 1rem;
   white-space: nowrap;
@@ -303,7 +316,7 @@ a {
   isolation: isolate;
   justify-self: center;
   width: 100%;
-  max-width: 340px;
+  max-width: 420px;
   margin: 0;
   padding: 1.25rem;
   background: var(--bg-card);
@@ -316,12 +329,11 @@ a {
   position: absolute;
   inset: 1rem -0.5rem -0.5rem 1rem;
   z-index: -1;
-  border: 1px solid rgba(184, 139, 30, 0.4);
+  border: 1px solid rgba(181, 133, 29, 0.45);
 }
 
 .hero__media img {
   width: 100%;
-  max-width: 340px;
   border: 1px solid var(--border-soft);
 }
 
@@ -388,10 +400,19 @@ section:target > .container {
   background: var(--accent-gold);
 }
 
+.section-kicker {
+  margin-bottom: 0.4rem;
+  color: var(--accent-burgundy);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .section-head h2 {
   margin: 0;
   font-family: var(--font-heading);
-  font-size: clamp(1.7rem, 4.4vw, 3rem);
+  font-size: clamp(1.7rem, 4.4vw, 2.9rem);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.015em;
@@ -408,22 +429,33 @@ section:target > .container {
   transform: translateX(-50%);
 }
 
-.subtitle {
-  margin-bottom: 1rem;
-  padding-left: 0.9rem;
-  border-left: 3px solid var(--accent-gold);
-  color: var(--accent-blue);
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.45;
+.section-head--light .section-head h2,
+.section-head--light h2 {
+  color: var(--text-light);
 }
 
-.subtitle--light {
+.section-head--light .section-kicker {
+  color: var(--accent-gold-light);
+}
+
+
+.part-label {
+  margin: 0 0 1rem;
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--accent-gold);
+  color: var(--accent-burgundy);
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.part-label--light {
   color: var(--accent-gold-light);
   border-left-color: var(--accent-gold-light);
 }
 
-/* ---------- Linha do tempo ---------- */
+/* ---------- Seção 1: linha do tempo ---------- */
 .timeline {
   margin-left: 0.5rem;
   padding-left: var(--timeline-pad);
@@ -451,170 +483,140 @@ section:target > .container {
   border-radius: 50%;
 }
 
-/* ---------- Comparação e marcos legais ---------- */
-.compare-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.25rem;
-  margin: 1.5rem 0 2.5rem;
-}
-
-.compare-card {
-  min-width: 0;
-  padding: clamp(1.25rem, 3vw, 1.75rem);
-  background: var(--bg-card);
-  border: 1px solid var(--border-soft);
-  border-top: 3px solid var(--accent-gold);
-  box-shadow: 0 16px 36px -30px rgba(17, 22, 34, 0.7);
-}
-
-.compare-card h3 {
-  margin: 0 0 0.75rem;
-  font-family: var(--font-heading);
-  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
-  line-height: 1.3;
-}
-
-.compare-card p:last-child {
-  margin-bottom: 0;
-}
-
-.law-band {
-  padding: clamp(1.25rem, 3vw, 2rem);
-  background: var(--accent-blue);
-  color: var(--bg-card);
-  border-left: 5px solid var(--accent-gold);
-}
-
-.law-band p {
-  margin: 0;
-}
-
-.law-band strong {
-  color: var(--bg-card);
-}
-
-/* ---------- Biografia e campanha ---------- */
+/* ---------- Seção 2: biografia e não violência ---------- */
 .editorial-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-.bio {
-  min-width: 0;
-}
-
-.campaign-card {
-  min-width: 0;
-  margin-top: 0.5rem;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  background: var(--bg-dark);
-  color: var(--text-light);
-  border-top: 3px solid var(--accent-gold);
-}
-
-.pull-quote {
-  margin-bottom: 1rem;
-  color: var(--accent-gold-light);
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.campaign-card p:last-child {
-  margin-bottom: 0;
-}
-
-/* ---------- Avanços do governo ---------- */
-.block {
-  margin-bottom: clamp(2.5rem, 6vw, 4rem);
-}
-
-.pillar-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.pillar-card {
-  min-width: 0;
-  padding: clamp(1.25rem, 3vw, 1.75rem);
-  background: var(--bg-card);
-  border: 1px solid var(--border-soft);
-  border-bottom: 3px solid var(--accent-gold);
-}
-
-.pillar-card__title {
-  margin-bottom: 0.6rem;
-  color: var(--accent-blue);
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.pillar-card p:last-child {
-  margin-bottom: 0;
-}
-
-.memory-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 2.5rem);
   align-items: start;
 }
 
-.memory-grid__copy {
+.bio {
   min-width: 0;
 }
 
-.memory-grid__figure {
+.philosophy-card {
+  min-width: 0;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-top: 4px solid var(--accent-burgundy);
+  box-shadow: var(--shadow-editorial);
+}
+
+.philosophy-card p:last-child {
+  margin-bottom: 0;
+}
+
+.pull-quote {
+  margin-bottom: 1rem;
+  color: var(--accent-gold);
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+/* ---------- Seção 3: mobilizações ---------- */
+.mobilization-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+.mobilization-figure {
   min-width: 0;
   margin: 0;
   padding: 0.6rem;
   background: var(--bg-card);
   border: 1px solid var(--border-soft);
+  border-top: 4px solid var(--accent-gold);
   box-shadow: var(--shadow-editorial);
 }
 
-.memory-grid__figure img {
+.mobilization-figure img {
   width: 100%;
-  aspect-ratio: 620 / 465;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
+  border: 1px solid var(--border-soft);
 }
 
-.michelle-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 2.5rem);
-  align-items: center;
-  padding: clamp(1.25rem, 3vw, 2rem);
+.mobilization-copy {
+  min-width: 0;
+}
+
+.mobilization-article {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.mobilization-article:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Seção 4: marcha e conquistas ---------- */
+.march-figure {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto clamp(2rem, 5vw, 3rem);
+  padding: 0.75rem;
   background: var(--bg-card);
   border: 1px solid var(--border-soft);
-  border-left: 4px solid var(--accent-gold);
+  border-top: 4px solid var(--accent-gold);
   box-shadow: var(--shadow-editorial);
 }
 
-.michelle-card__copy {
-  min-width: 0;
-}
-
-.michelle-card__figure {
-  min-width: 0;
-  margin: 0;
-}
-
-.michelle-card__figure img {
+.march-figure img {
   width: 100%;
-  aspect-ratio: 1024 / 683;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border: 1px solid var(--border-soft);
 }
 
-/* ---------- Limites institucionais ---------- */
+.march-figure figcaption {
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+
+.block {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.block:last-child {
+  margin-bottom: 0;
+}
+
+.achievement-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.achievement-card {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-bottom: 3px solid var(--accent-burgundy);
+  box-shadow: 0 16px 36px -30px rgba(20, 23, 31, 0.7);
+}
+
+.achievement-card > strong {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--accent-burgundy);
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.achievement-card p {
+  margin-bottom: 0;
+}
+
+/* ---------- Seção 5: justiça econômica ---------- */
 .dark-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -622,7 +624,7 @@ section:target > .container {
   align-items: start;
 }
 
-.dark-portrait {
+.dark-figure {
   justify-self: start;
   width: 100%;
   max-width: 420px;
@@ -634,9 +636,9 @@ section:target > .container {
   box-shadow: 0 28px 60px -30px rgba(0, 0, 0, 0.9);
 }
 
-.dark-portrait img {
+.dark-figure img {
   width: 100%;
-  aspect-ratio: 682 / 1024;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 2px;
 }
@@ -650,18 +652,26 @@ section:target > .container {
 }
 
 .dark-article {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .dark-article:last-child {
   margin-bottom: 0;
 }
 
+.dark-article p {
+  color: rgba(243, 244, 246, 0.88);
+}
+
+.dark-article strong {
+  color: var(--accent-gold-light);
+}
+
 .dark-article p:last-child {
   margin-bottom: 0;
 }
 
-/* ---------- Legado ---------- */
+/* ---------- Seção 6: legado ---------- */
 .lead {
   color: var(--text-main);
   font-size: clamp(1.1rem, 1.8vw, 1.3rem);
@@ -715,12 +725,12 @@ section:target > .container {
 .back-to-top:focus-visible {
   background: var(--accent-gold);
   color: var(--bg-dark);
-  box-shadow: 0 8px 18px -10px rgba(184, 139, 30, 0.9);
+  box-shadow: 0 8px 18px -10px rgba(181, 133, 29, 0.9);
   transform: translateY(-4px);
 }
 
 .back-to-top:active {
-  box-shadow: 0 2px 6px -4px rgba(184, 139, 30, 0.9);
+  box-shadow: 0 2px 6px -4px rgba(181, 133, 29, 0.9);
   transform: translateY(2px);
 }
 
@@ -743,8 +753,8 @@ section:target > .container {
     gap: 0.15rem;
   }
 
-  .compare-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .achievement-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -763,23 +773,15 @@ section:target > .container {
   }
 
   .hero__grid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  }
-
-  .editorial-grid {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  }
-
-  .campaign-card {
-    margin-top: 0;
-  }
-
-  .memory-grid {
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   }
 
-  .michelle-card {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  .editorial-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+
+  .mobilization-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   }
 
   .dark-grid {
@@ -795,20 +797,20 @@ section:target > .container {
 
 /* ---------- Desktop amplo: 1024px ---------- */
 @media (min-width: 1024px) {
-  .pillar-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .editorial-grid {
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
-  }
-
   .site-nav ul {
     gap: 0 1.5rem;
   }
 
   .site-nav a {
     font-size: 0.86rem;
+  }
+
+  .hero__grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .editorial-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   }
 }
 
